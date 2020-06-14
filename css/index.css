@@ -1,0 +1,20 @@
+/* purgecss start ignore */
+@tailwind base;
+@tailwind components;
+body {
+  background: linear-gradient(
+    122.01deg,
+    #151515 0%,
+    #212121 55.21%,
+    #151515 100%
+  );
+}
+/* purgecss end ignore */
+@tailwind utilities;
+
+/* @font-face {
+  font-family: "Playfair Display";
+  font-weight: 400;
+  src: url("../public/fonts/PlayfairDisplay-Regular.ttf") format("truetype");
+  font-display: fallback;
+} */
