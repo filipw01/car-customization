@@ -19,11 +19,11 @@
     {
       "id": 11,
       "name": "white",
-      "value": "#E9E3E3",
+      "hexValue": "#E9E3E3",
       "dependencies": [[2, 3, 4]]
     },
-    { "id": 12, "name": "black", "value": "#322F2F" },
-    { "id": 13, "name": "red", "value": "#DE4339" },
-    { "id": 14, "name": "gold", "value": "#DABC52" }
+    { "id": 12, "name": "black", "hexValue": "#322F2F" },
+    { "id": 13, "name": "red", "hexValue": "#DE4339" },
+    { "id": 14, "name": "gold", "hexValue": "#DABC52" }
   ]
 }

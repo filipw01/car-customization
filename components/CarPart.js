@@ -1,37 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
+import CarComponentButton from "../components/CarComponentButton";
+import CarColorButton from "../components/CarColorButton";
 
 export default function CarPart({
   type = "component",
   options,
-  activeOptionId,
   partName,
   className,
+  side,
 }) {
+  const [activeOptionId, setActiveOptionId] = useState(null);
   return (
     <div className={`inline-block ${className}`}>
-      <p className="text-xs">{partName}</p>
+      <p
+        className={`mb-1 text-xs uppercase ${
+          side === "left" ? "text-right" : ""
+        }`}
+      >
+        {partName}
+      </p>
       <div className="flex pt-3 border-t border-white">
-        {options.map((option) => (
-          <button
-            style={{ backgroundColor: type === "color" && option.value }}
-            className={`uppercase py-2 px-4 border border-white rounded-md part-button ${
-              activeOptionId === option.id ? "bg-white" : ""
-            }`}
-            key={option.id}
-          >
-            {type === "component" && option.name}
-          </button>
-        ))}
+        {options.map((option) => {
+          let buttonState = "inactive";
+          if (activeOptionId === option.id) {
+            buttonState = "active";
+          }
+          if (type === "color") {
+            return (
+              <CarColorButton
+                key={option.id}
+                clickHandler={() => setActiveOptionId(option.id)}
+                color={option.hexValue}
+                state={buttonState}
+              />
+            );
+          } else if (type === "component") {
+            return (
+              <CarComponentButton
+                key={option.id}
+                clickHandler={() => setActiveOptionId(option.id)}
+                name={option.name}
+                state={buttonState}
+              />
+            );
+          }
+        })}
       </div>
-      <style jsx>{`
-        .part-button {
-          min-width: 3rem;
-          min-height: 2rem;
-        }
-        .part-button + .part-button {
-          margin-left: 0.5rem;
-        }
-      `}</style>
     </div>
   );
 }
