@@ -29,7 +29,7 @@ export const Summary = ({ activeParts }) => {
     100;
 
   return (
-    <div className="max-w-md px-8 py-6 bg-light-gray">
+    <div className="max-w-md px-8 py-6 pb-20 rounded bg-light-gray bottom-tear">
       <h2 className="mb-2 text-4xl">Summary</h2>
       <div className="flex justify-between py-1 text-sm border-b border-dark-gray">
         <div>Model</div>
@@ -61,6 +61,24 @@ export const Summary = ({ activeParts }) => {
       <button className="block w-4/5 py-3 mx-auto mt-4 text-sm bg-black rounded">
         Order your awesome car (${sum})
       </button>
+      <svg
+        width="0"
+        height="0"
+        viewBox="0 0 451 339"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <clipPath id="tearDown">
+            <path d="M16.5 327L0 295.5V0L450.5 3.5V310.5L437.5 332.5L426.5 312L416 327L405 312L393.5 332.5L381 312V338.5L366.5 318.5L355 327L348 307L331.5 332.5L319 314.5L313 327L300 307L285.5 327L261 303.5L256 327L251 318.5L238.5 327L235 303.5L209 338.5L200 295.5L190 318.5L183.5 303.5L172 318.5L153.5 295.5L139.5 332.5L110 307L97 327L74.5 310.5L59 324.5L51 314.5L37.5 327L25.5 300L16.5 327Z" />
+          </clipPath>
+        </defs>
+      </svg>
+
+      <style jsx>{`
+        .bottom-tear {
+          clip-path: url(#tearDown);
+        }
+      `}</style>
     </div>
   );
 };

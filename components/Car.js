@@ -69,7 +69,7 @@ const Car = ({ fetchParts, availableParts, activeParts, changePart }) => {
         activePartId={activeParts.find((part) => part.type === "color")?.id}
         side="left"
       />
-      <div className="w-full col-start-2 row-start-1 row-end-5 justify-self-center">
+      <div className="flex w-full h-full col-start-2 row-start-1 row-end-5 text-4xl text-center justify-self-center">
         <CarImage model={model} color={color ?? "transparent"} />
       </div>
       <style jsx>{`

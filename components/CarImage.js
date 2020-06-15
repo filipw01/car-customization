@@ -3,7 +3,12 @@ import React from "react";
 export default function CarImage({ model, color }) {
   if (model === "PRO RS3")
     return (
-      <svg viewBox="0 0 183 165" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        className="flex-grow"
+        viewBox="0 0 183 165"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
           stroke="#fff"
           strokeWidth="2"
@@ -14,7 +19,12 @@ export default function CarImage({ model, color }) {
     );
   if (model === "UBER RS2")
     return (
-      <svg viewBox="0 0 752 670" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        className="flex-grow"
+        viewBox="0 0 752 670"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
           stroke="#fff"
           strokeWidth="2"
@@ -25,7 +35,11 @@ export default function CarImage({ model, color }) {
     );
   if (model === "STANDARD")
     return (
-      <svg viewBox="0 0 480 384" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        className="flex-grow"
+        viewBox="0 0 480 384"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
           stroke="#fff"
           strokeWidth="2"
@@ -36,7 +50,12 @@ export default function CarImage({ model, color }) {
     );
   if (model === "WK")
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 407 339">
+      <svg
+        className="flex-grow"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 407 339"
+      >
         <path
           fill={color}
           stroke="#fff"
@@ -45,9 +64,5 @@ export default function CarImage({ model, color }) {
         />
       </svg>
     );
-  return (
-    <div className="flex items-center justify-center h-full text-4xl">
-      Pick your model
-    </div>
-  );
+  return <div>Pick your model</div>;
 }
