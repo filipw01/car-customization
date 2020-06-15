@@ -1,41 +1,50 @@
-import React, { useEffect, useState } from "react";
-import CarPart from "../components/CarPart";
+import React, { useEffect } from "react";
+import CarComponent from "../components/CarComponent";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getParts, changePart } from "../redux/modules/car";
 
-export default function Car({ color = "#DE4339" }) {
-  const [carComponents, setCarComponents] = useState({
-    models: [],
-    gearboxes: [],
-    engines: [],
-    colors: [],
-  });
+const Car = ({
+  color = "#DE4339",
+  fetchParts,
+  availableParts,
+  activeParts,
+  changePart,
+}) => {
   useEffect(() => {
-    fetch("/api/carComponents")
-      .then((data) => data.json())
-      .then((data) => setCarComponents(data));
+    fetchParts();
   }, []);
   return (
     <div className="col-gap-8 car-grid">
-      <CarPart
+      <CarComponent
         className="col-start-1 row-start-2 justify-self-end"
         partName="Model"
-        options={carComponents.models}
+        changePart={(id) => changePart("model", id)}
+        parts={availableParts.model}
+        activePartId={activeParts.model}
       />
-      <CarPart
+      <CarComponent
         className="col-start-3 row-start-1"
         partName="Gearbox"
-        options={carComponents.gearboxes}
+        changePart={(id) => changePart("gearbox", id)}
+        parts={availableParts.gearbox}
+        activePartId={activeParts.gearbox}
         side="left"
       />
-      <CarPart
+      <CarComponent
         className="col-start-1 row-start-3"
         partName="Engine"
-        options={carComponents.engines}
+        changePart={(id) => changePart("engine", id)}
+        parts={availableParts.engine}
+        activePartId={activeParts.engine}
       />
-      <CarPart
+      <CarComponent
         className="col-start-3 row-start-4"
         type="color"
         partName="Color"
-        options={carComponents.colors}
+        changePart={(id) => changePart("color", id)}
+        parts={availableParts.color}
+        activePartId={activeParts.color}
         side="left"
       />
       <div className="w-full col-start-2 justify-self-center">
@@ -71,4 +80,32 @@ export default function Car({ color = "#DE4339" }) {
       `}</style>
     </div>
   );
-}
+};
+
+Car.propTypes = {
+  colors: PropTypes.string,
+  fetchParts: PropTypes.func,
+  changePart: PropTypes.func,
+  availableParts: PropTypes.object,
+  activeParts: PropTypes.object,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    availableParts: state.car.availableParts,
+    activeParts: state.car.activeParts,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchParts: () => {
+      return dispatch(getParts());
+    },
+    changePart: (type, id) => {
+      return dispatch(changePart(type, id));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Car);

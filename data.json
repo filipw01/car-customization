@@ -1,21 +1,21 @@
 {
-  "models": [
+  "model": [
     { "id": 1, "name": "PRO RS3" },
     { "id": 2, "name": "uber rs2" },
     { "id": 3, "name": "standard" },
     { "id": 4, "name": "wk" }
   ],
-  "gearboxes": [
+  "gearbox": [
     { "id": 5, "name": "manual", "dependencies": [1] },
     { "id": 6, "name": "automatic", "dependencies": [[3, 4]] }
   ],
-  "engines": [
+  "engine": [
     { "id": 7, "name": "5.2L 532BHP", "dependencies": [6] },
     { "id": 8, "name": "4.2L 443BHP" },
     { "id": 9, "name": "3.6L 374BHP" },
     { "id": 10, "name": "2.0L 166BHP" }
   ],
-  "colors": [
+  "color": [
     {
       "id": 11,
       "name": "white",

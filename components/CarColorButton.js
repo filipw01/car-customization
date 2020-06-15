@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { contrast } from "chroma-js";
+import PropTypes from "prop-types";
 
-export default function CarColorButton({ color, state, clickHandler }) {
+const CarColorButton = ({ color, state, clickHandler }) => {
   const [contrastColor] = useState(() => {
     if (contrast("#fff", color) + 1 > contrast("#000", color)) {
       return "white";
@@ -39,4 +40,12 @@ export default function CarColorButton({ color, state, clickHandler }) {
       `}</style>
     </button>
   );
-}
+};
+
+CarColorButton.propTypes = {
+  color: PropTypes.string.isRequired,
+  state: PropTypes.oneOf(["active", "inactive", "disabled"]),
+  clickHandler: PropTypes.func,
+};
+
+export default CarColorButton;
