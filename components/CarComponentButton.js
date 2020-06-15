@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import ReactTooltip from "react-tooltip";
 
-const CarComponentButton = ({ name, state, clickHandler }) => {
+const CarComponentButton = ({ name, state, clickHandler, tooltipText }) => {
   let additionalClassNames = "";
   switch (state) {
     case "active":
@@ -11,19 +12,31 @@ const CarComponentButton = ({ name, state, clickHandler }) => {
       additionalClassNames = "line-through";
       break;
   }
+  const disabled = state === "disabled";
   return (
-    <button
-      className={`uppercase py-2 px-4 border border-white rounded-md part-button text-sm mx-between-2 ${additionalClassNames}`}
-      onClick={clickHandler}
-    >
-      {name}
-    </button>
+    <div className="mx-between-2">
+      <span data-tip={tooltipText} data-tip-disable={!disabled}>
+        <button
+          disabled={disabled}
+          className={`uppercase py-2 px-4 border border-white rounded-md part-button text-sm ${additionalClassNames}`}
+          onClick={!disabled ? clickHandler : null}
+        >
+          {name}
+        </button>
+      </span>
+      <ReactTooltip
+        backgroundColor="white"
+        textColor="black"
+        effect="solid"
+      ></ReactTooltip>
+    </div>
   );
 };
 CarComponentButton.propTypes = {
   name: PropTypes.string.isRequired,
   state: PropTypes.oneOf(["active", "inactive", "disabled"]),
   clickHandler: PropTypes.func,
+  mouseOverHandler: PropTypes.func,
 };
 
 export default CarComponentButton;

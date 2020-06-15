@@ -1,13 +1,13 @@
 {
   "model": [
     { "id": 1, "name": "PRO RS3" },
-    { "id": 2, "name": "uber rs2" },
-    { "id": 3, "name": "standard" },
-    { "id": 4, "name": "wk" }
+    { "id": 2, "name": "UBER RS2" },
+    { "id": 3, "name": "STANDARD" },
+    { "id": 4, "name": "WK" }
   ],
   "gearbox": [
-    { "id": 5, "name": "manual", "dependencies": [1] },
-    { "id": 6, "name": "automatic", "dependencies": [[3, 4]] }
+    { "id": 5, "name": "MANUAL", "dependencies": [1, 10] },
+    { "id": 6, "name": "AUTOMATIC", "dependencies": [[3, 4]] }
   ],
   "engine": [
     { "id": 7, "name": "5.2L 532BHP", "dependencies": [6] },

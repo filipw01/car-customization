@@ -3,6 +3,8 @@ import CarComponent from "../components/CarComponent";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getParts, changePart } from "../redux/modules/car";
+import getMissingDependenciesIds from "../utils/getMissingDependencies";
+import getPartsById from "../utils/getPartsById";
 
 const Car = ({
   color = "#DE4339",
@@ -14,19 +16,41 @@ const Car = ({
   useEffect(() => {
     fetchParts();
   }, []);
+  const getMissingDependencies = (dependencies) => {
+    const missingDependenciesIds = getMissingDependenciesIds(
+      dependencies,
+      activeParts
+    );
+    const missingParts = getPartsById(missingDependenciesIds, availableParts);
+    const missingPartsString = missingParts
+      .map((part) => {
+        if (Array.isArray(part)) {
+          return part
+            .map((eitherPart) => {
+              return `"${eitherPart.name}"`;
+            })
+            .join(" or ");
+        }
+        return `"${part.name}"`;
+      })
+      .join(" and ");
+    return `Requires ${missingPartsString}`;
+  };
   return (
     <div className="col-gap-8 car-grid">
       <CarComponent
         className="col-start-1 row-start-2 justify-self-end"
         partName="Model"
-        changePart={(id) => changePart("model", id)}
+        changePart={(part) => changePart("model", part)}
         parts={availableParts.model}
+        getMissingDependencies={getMissingDependencies}
         activePartId={activeParts.model}
       />
       <CarComponent
         className="col-start-3 row-start-1"
         partName="Gearbox"
-        changePart={(id) => changePart("gearbox", id)}
+        changePart={(part) => changePart("gearbox", part)}
+        getMissingDependencies={getMissingDependencies}
         parts={availableParts.gearbox}
         activePartId={activeParts.gearbox}
         side="left"
@@ -34,7 +58,8 @@ const Car = ({
       <CarComponent
         className="col-start-1 row-start-3"
         partName="Engine"
-        changePart={(id) => changePart("engine", id)}
+        changePart={(part) => changePart("engine", part)}
+        getMissingDependencies={getMissingDependencies}
         parts={availableParts.engine}
         activePartId={activeParts.engine}
       />
@@ -42,7 +67,8 @@ const Car = ({
         className="col-start-3 row-start-4"
         type="color"
         partName="Color"
-        changePart={(id) => changePart("color", id)}
+        changePart={(part) => changePart("color", part)}
+        getMissingDependencies={getMissingDependencies}
         parts={availableParts.color}
         activePartId={activeParts.color}
         side="left"
