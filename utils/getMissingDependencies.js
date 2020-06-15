@@ -1,12 +1,16 @@
-export default function getMissingDependencies(dependencies, activeParts) {
-  const activePartsValues = Object.values(activeParts);
-  const MissingDependencies = [];
-  if (dependencies) {
+export default function getMissingDependencies(
+  dependencies,
+  activeParts,
+  allParts
+) {
+  const activePartsIds = activeParts.map((part) => part.id);
+  const missingDependencies = [];
+  if (dependencies && activeParts.length !== 0) {
     for (const dependency of dependencies) {
       let dependencySatisfied = false;
       if (Array.isArray(dependency)) {
         for (const either of dependency) {
-          if (activePartsValues.includes(either)) {
+          if (activePartsIds.includes(either)) {
             dependencySatisfied = true;
             break;
           } else {
@@ -15,14 +19,20 @@ export default function getMissingDependencies(dependencies, activeParts) {
         }
 
         if (dependencySatisfied === false) {
-          MissingDependencies.push(dependency);
+          missingDependencies.push(
+            allParts.filter((part) => dependency.includes(part.id))
+          );
         }
       } else {
-        if (!activePartsValues.includes(dependency)) {
-          MissingDependencies.push(dependency);
+        if (!activePartsIds.includes(dependency)) {
+          missingDependencies.push(
+            allParts.find((part) => {
+              return part.id === dependency;
+            })
+          );
         }
       }
     }
   }
-  return MissingDependencies;
+  return missingDependencies;
 }

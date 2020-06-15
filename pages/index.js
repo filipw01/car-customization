@@ -1,17 +1,19 @@
 import Head from "next/head";
 import Car from "../components/Car";
+import Summary from "../components/Summary";
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-6 py-16 text-white min-h-screen flex flex-col justify-center">
+    <div className="container flex flex-col justify-center min-h-screen px-6 py-16 mx-auto text-white">
       <Head>
         <title>Car customization</title>
       </Head>
       <h1 className="text-6xl">Car customization</h1>
-      <p className="text-xl max-w-xs mb-16">
+      <p className="max-w-xs mb-16 text-xl">
         Choose your car preferences and we'll summarize them for you
       </p>
       <Car />
+      <Summary />
     </div>
   );
 }

@@ -6,68 +6,59 @@ const CHANGE_AVAILABLE_PARTS = "car-customization/car/CHANGE_AVAILABLE_PARTS";
 
 // Reducer
 const defaultState = {
-  availableParts: { model: [], gearbox: [], engine: [], color: [] },
-  activeParts: { model: null, gearbox: null, engine: null, color: null },
+  availableParts: [],
+  activeParts: [],
 };
 
 export default function reducer(state = defaultState, action = {}) {
   switch (action.type) {
     case CHANGE_PART:
-      if (
-        ["model", "gearbox", "engine", "color"].includes(action.payload.type)
-      ) {
-        let updatedStatePartsEntries;
-        let disabledActive = true;
-        const activeParts = {
-          ...state.activeParts,
-          [action.payload.type]: action.payload.id,
-        };
-        let activePartsEntries = Object.entries(activeParts);
-        while (disabledActive) {
-          disabledActive = false;
-          updatedStatePartsEntries = Object.entries(state.availableParts).map(
-            ([componentName, parts]) => {
-              return [
-                componentName,
-                parts.map((part) => {
-                  const dependencies = part.dependencies;
-                  const dependenciesSatisfied =
-                    getMissingDependencies(
-                      dependencies,
-                      Object.fromEntries(activePartsEntries)
-                    ).length === 0;
-                  if (dependenciesSatisfied === false) {
-                    activePartsEntries = activePartsEntries.filter(
-                      ([_key, value]) => {
-                        if (value === part.id) {
-                          console.log(value);
-                          disabledActive = true;
-                        }
-                        return value !== part.id;
-                      }
-                    );
-                    return { ...part, state: "disabled" };
-                  } else {
-                    return { ...part, state: "inactive" };
-                  }
-                }),
-              ];
-            }
-          );
-        }
-
-        const updatedActiveParts = Object.fromEntries(activePartsEntries);
-        const updatedStateParts = Object.fromEntries(updatedStatePartsEntries);
-        return {
-          ...state,
-          availableParts: updatedStateParts,
-          activeParts: updatedActiveParts,
-        };
+      let disabledActive = true;
+      let availableParts = state.availableParts;
+      let activeParts = [
+        ...state.activeParts.filter(
+          (part) => part.type !== action.payload.type
+        ),
+        action.payload,
+      ];
+      while (disabledActive) {
+        disabledActive = false;
+        availableParts = availableParts.map((part) => {
+          const dependencies = part.dependencies;
+          const dependenciesSatisfied =
+            getMissingDependencies(
+              dependencies,
+              activeParts,
+              state.availableParts
+            ).length === 0;
+          if (dependenciesSatisfied === false) {
+            activeParts = activeParts.filter((activePart) => {
+              if (activePart.id === part.id) {
+                disabledActive = true;
+                return false;
+              }
+              return true;
+            });
+            return { ...part, state: "disabled" };
+          } else {
+            return { ...part, state: "inactive" };
+          }
+        });
       }
-      throw new Error("Wrong car part type");
+      return {
+        ...state,
+        availableParts,
+        activeParts,
+      };
 
     case CHANGE_AVAILABLE_PARTS:
-      return { ...state, availableParts: action.payload };
+      return {
+        ...state,
+        availableParts: action.payload.map((part) => ({
+          ...part,
+          state: "inactive",
+        })),
+      };
 
     default:
       return state;
@@ -75,8 +66,8 @@ export default function reducer(state = defaultState, action = {}) {
 }
 
 // Action Creators
-export function changePart(type, id) {
-  return { type: CHANGE_PART, payload: { type, id } };
+export function changePart(part) {
+  return { type: CHANGE_PART, payload: part };
 }
 
 export function changeAvailableParts(parts) {

@@ -14,7 +14,7 @@ const CarComponentButton = ({ name, state, clickHandler, tooltipText }) => {
   }
   const disabled = state === "disabled";
   return (
-    <div className="mx-between-2">
+    <div>
       <span data-tip={tooltipText} data-tip-disable={!disabled}>
         <button
           disabled={disabled}

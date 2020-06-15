@@ -22,7 +22,7 @@ const CarComponent = ({
       >
         {partName}
       </p>
-      <div className="flex pt-3 border-t border-white">
+      <div className="flex pt-3 space-x-2 border-t border-white">
         {parts?.map((part) => {
           let buttonState = part.state;
           if (activePartId && activePartId === part.id) {
@@ -32,7 +32,7 @@ const CarComponent = ({
             return (
               <CarColorButton
                 key={part.id}
-                clickHandler={() => changePart(part.id)}
+                clickHandler={() => changePart(part)}
                 tooltipText={getMissingDependencies(part.dependencies)}
                 color={part.hexValue}
                 state={buttonState}
@@ -42,7 +42,7 @@ const CarComponent = ({
             return (
               <CarComponentButton
                 key={part.id}
-                clickHandler={() => changePart(part.id)}
+                clickHandler={() => changePart(part)}
                 tooltipText={getMissingDependencies(part.dependencies)}
                 name={part.name}
                 state={buttonState}
