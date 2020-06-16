@@ -37,6 +37,22 @@ const CarColorButton = ({ color, state, clickHandler, tooltipText }) => {
               />
             </svg>
           )}
+          {disabled && (
+            <svg
+              className="self-center w-1/2 mx-auto"
+              viewBox="0 0 9 9"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke={contrastColor}
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M1 1L4.5 4.5M4.5 4.5L1 8M4.5 4.5L8 8M4.5 4.5L8 1"
+              />
+            </svg>
+          )}
+
           <style jsx>{`
             .color-button {
               min-width: 3rem;

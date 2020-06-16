@@ -38,9 +38,11 @@ export default function reducer(state = defaultState, action = {}) {
                   draftState.availableParts
                 ).length !== 0;
               if (hasMissingDependencies === true) {
+                // Remove disabled part from active parts
                 draftState.activeParts = draftState.activeParts.filter(
                   (activePart) => {
                     if (activePart.id === currentPart.id) {
+                      // Repeat because active part got disabled
                       disabledActivePart = true;
                       return false;
                     }
@@ -57,13 +59,12 @@ export default function reducer(state = defaultState, action = {}) {
       });
 
     case CHANGE_AVAILABLE_PARTS:
-      return {
-        ...state,
-        availableParts: action.payload.map((part) => ({
+      return produce(state, (draftState) => {
+        draftState.availableParts = action.payload.map((part) => ({
           ...part,
           state: "inactive",
-        })),
-      };
+        }));
+      });
 
     default:
       return state;

@@ -9,19 +9,36 @@ import { changePart } from "../redux/modules/car";
 const CarComponent = ({
   type,
   className,
-  side,
+  side = "right",
   activeParts,
   availableParts,
   changePart,
+  lineAngle,
+  lineWidth = "6",
 }) => {
   const dependenciesToString = (dependencies) => {
     return missingDependenciesString(dependencies, activeParts, availableParts);
   };
   const parts = availableParts.filter((part) => part.type === type);
   const activePartId = activeParts.find((part) => part.type === type)?.id;
-
+  const reverseSide = side === "left" ? "right" : "left";
   return (
-    <div className={`inline-block ${className}`}>
+    <div className={`relative ${className}`}>
+      <div
+        className={`h-px origin-${reverseSide} bg-white justify-self-end absolute ${side}-0 top-0`}
+        style={{
+          width: `${lineWidth}rem`,
+          transform: `translate(${
+            side === "left" ? "-100%" : "100%"
+          }, 1.375rem) rotate(${lineAngle}deg)`,
+        }}
+      >
+        <div
+          className={`w-8 h-8 transform -translate-y-1/2 bg-white rounded-full ${
+            side === "right" ? "ml-auto" : ""
+          }`}
+        ></div>
+      </div>
       <p
         className={`mb-1 text-xs uppercase font-display tracking-wider ${
           side === "left" ? "text-right" : ""
@@ -83,6 +100,8 @@ CarComponent.propTypes = {
     }).isRequired
   ),
   changePart: PropTypes.func,
+  lineAngle: PropTypes.number.isRequired,
+  lineWidth: PropTypes.number,
 };
 
 const mapStateToProps = (state) => {

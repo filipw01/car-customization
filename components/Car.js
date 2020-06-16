@@ -15,17 +15,26 @@ const Car = ({ fetchParts, activeModel, activeColor }) => {
       <CarComponent
         className="col-start-1 row-start-2 justify-self-end"
         type="model"
+        lineAngle={30}
       />
       <CarComponent
         className="col-start-3 row-start-1"
         type="gearbox"
         side="left"
+        lineAngle={-25}
+        lineWidth={16}
       />
-      <CarComponent className="col-start-1 row-start-3" type="engine" />
+      <CarComponent
+        className="col-start-1 row-start-3"
+        type="engine"
+        lineAngle={10}
+        lineWidth={16}
+      />
       <CarComponent
         className="col-start-3 row-start-4"
         type="color"
         side="left"
+        lineAngle={30}
       />
       <div className="flex items-center w-full h-full col-start-2 row-start-1 row-end-4 text-4xl text-center">
         <CarImage model={activeModel} color={activeColor} />
