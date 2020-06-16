@@ -16,9 +16,21 @@ button:focus {
 /* purgecss end ignore */
 @tailwind utilities;
 
-/* @font-face {
-  font-family: "Playfair Display";
+@font-face {
+  font-family: "Livvic";
   font-weight: 400;
-  src: url("../public/fonts/PlayfairDisplay-Regular.ttf") format("truetype");
-  font-display: fallback;
-} */
+  src: url("../public/fonts/Livvic-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Livvic";
+  font-weight: 500;
+  src: url("../public/fonts/Livvic-Medium.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Overlock SC";
+  font-weight: 400;
+  src: url("../public/fonts/OverlockSC-Regular.ttf") format("truetype");
+  font-display: swap;
+}

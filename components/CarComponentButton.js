@@ -18,7 +18,7 @@ const CarComponentButton = ({ name, state, clickHandler, tooltipText }) => {
       <span data-tip={tooltipText} data-tip-disable={!disabled}>
         <button
           disabled={disabled}
-          className={`uppercase py-2 px-4 border border-white rounded-md part-button text-sm ${additionalClassNames}`}
+          className={`uppercase py-2 px-4 border border-white rounded-md part-button text-sm font-medium ${additionalClassNames}`}
           onClick={!disabled ? clickHandler : null}
         >
           {name}
@@ -32,6 +32,7 @@ const CarComponentButton = ({ name, state, clickHandler, tooltipText }) => {
     </div>
   );
 };
+
 CarComponentButton.propTypes = {
   name: PropTypes.string.isRequired,
   state: PropTypes.oneOf(["active", "inactive", "disabled"]),

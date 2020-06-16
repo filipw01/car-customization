@@ -1,8 +1,8 @@
 module.exports = {
   theme: {
     fontFamily: {
-      display: "Playfair Display",
-      body: "Open Sans",
+      display: "Overlock SC",
+      body: "Livvic",
     },
     extend: {
       colors: {

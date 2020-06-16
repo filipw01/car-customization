@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import Link from "next/link";
 import { connect } from "react-redux";
 import { contrast } from "chroma-js";
 
 export const Summary = ({ activeParts }) => {
   const [contrastColor, setContrastColor] = useState("black");
   const [color, setColor] = useState({ name: null, hexValue: null });
+  const activeColor = activeParts.find((part) => part.type === "color");
+  const isComplete = activeParts.length >= 4;
   useEffect(() => {
-    const activeColor = activeParts.find((part) => part.type === "color");
     setColor({
       name: activeColor?.name,
       hexValue: activeColor?.hexValue,
@@ -22,7 +24,7 @@ export const Summary = ({ activeParts }) => {
         setContrastColor("black");
       }
     }
-  }, [activeParts]);
+  }, [activeColor]);
 
   const sum =
     Math.round(activeParts.reduce((acc, curr) => acc + curr.price, 0) * 100) /
@@ -30,23 +32,29 @@ export const Summary = ({ activeParts }) => {
 
   return (
     <div className="max-w-md px-8 py-6 pb-20 rounded bg-light-gray bottom-tear">
-      <h2 className="mb-2 text-4xl">Summary</h2>
+      <h2 className="mb-2 text-4xl font-display">Summary</h2>
       <div className="flex justify-between py-1 text-sm border-b border-dark-gray">
         <div>Model</div>
-        <div>{activeParts.find((part) => part.type === "model")?.name}</div>
+        <div className="font-medium">
+          {activeParts.find((part) => part.type === "model")?.name}
+        </div>
       </div>
       <div className="flex justify-between py-1 text-sm border-b border-dark-gray">
         <div>Gearbox</div>
-        <div>{activeParts.find((part) => part.type === "gearbox")?.name}</div>
+        <div className="font-medium">
+          {activeParts.find((part) => part.type === "gearbox")?.name}
+        </div>
       </div>
       <div className="flex justify-between py-1 text-sm border-b border-dark-gray">
         <div>Engine</div>
-        <div>{activeParts.find((part) => part.type === "engine")?.name}</div>
+        <div className="font-medium">
+          {activeParts.find((part) => part.type === "engine")?.name}
+        </div>
       </div>
       <div className="flex justify-between py-1 text-sm">
         <div>Color</div>
         {color?.hexValue && (
-          <div className="flex items-center">
+          <div className="flex items-center font-medium">
             <div
               className="w-4 h-4 mr-2 border rounded-full"
               style={{
@@ -58,9 +66,19 @@ export const Summary = ({ activeParts }) => {
           </div>
         )}
       </div>
-      <button className="block w-4/5 py-3 mx-auto mt-4 text-sm bg-black rounded">
-        Order your awesome car (${sum})
-      </button>
+      <div
+        className={`block w-4/5 px-6 py-3 mx-auto mt-4 text-sm text-center rounded ${
+          !isComplete ? "bg-transparent" : "bg-black"
+        }`}
+      >
+        {isComplete ? (
+          <Link href="/order/">
+            <a>Order your awesome car for ${sum}</a>
+          </Link>
+        ) : (
+          "Your car is incomplete"
+        )}
+      </div>
       <svg
         width="0"
         height="0"
@@ -93,6 +111,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Summary);
+export default connect(mapStateToProps, null)(Summary);
