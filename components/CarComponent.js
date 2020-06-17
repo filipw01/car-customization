@@ -8,7 +8,7 @@ import { changePart } from "../redux/modules/car";
 
 const CarComponent = ({
   type,
-  className,
+  className = "",
   side = "right",
   activeParts,
   availableParts,
