@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { contrast } from "chroma-js";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
+import { motion } from "framer-motion";
 
 const CarColorButton = ({ color, state, clickHandler, tooltipText }) => {
   const [contrastColor] = useState(() => {
@@ -12,13 +13,16 @@ const CarColorButton = ({ color, state, clickHandler, tooltipText }) => {
   });
   const disabled = state === "disabled";
   return (
-    <div>
+    <motion.div
+      whileHover={{ y: state === "inactive" ? -2 : 0 }}
+      whileTap={{ scale: state === "disabled" ? 1 : 1.05 }}
+    >
       <span data-tip={tooltipText} data-tip-disable={!disabled}>
         <button
           disabled={disabled}
           style={{ backgroundColor: color }}
           onClick={!disabled ? clickHandler : null}
-          className={`flex justify-end px-1 py-1 border rounded-md color-button border-transparent mx-between-2  ${
+          className={`flex justify-end px-1 py-1 border rounded-md color-button border-transparent mx-between-2 ${
             state === "active" ? `border-${contrastColor}` : ""
           }`}
         >
@@ -46,8 +50,8 @@ const CarColorButton = ({ color, state, clickHandler, tooltipText }) => {
             >
               <path
                 stroke={contrastColor}
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M1 1L4.5 4.5M4.5 4.5L1 8M4.5 4.5L8 8M4.5 4.5L8 1"
               />
             </svg>
@@ -66,7 +70,7 @@ const CarColorButton = ({ color, state, clickHandler, tooltipText }) => {
         textColor="black"
         effect="solid"
       ></ReactTooltip>
-    </div>
+    </motion.div>
   );
 };
 

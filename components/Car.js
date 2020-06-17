@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getParts } from "../redux/modules/car";
 import CarImage from "./CarImage";
+import { motion } from "framer-motion";
 
 const Car = ({ fetchParts, activeModel, activeColor }) => {
   useEffect(() => {
@@ -12,33 +13,48 @@ const Car = ({ fetchParts, activeModel, activeColor }) => {
 
   return (
     <div className="col-gap-8 car-grid">
-      <CarComponent
+      <motion.div
         className="col-start-1 row-start-2 justify-self-end"
-        type="model"
-        lineAngle={30}
-      />
-      <CarComponent
+        animate={{ scale: 1, opacity: 1, x: 0 }}
+        initial={{ scale: 0.5, opacity: 0, x: -100 }}
+      >
+        <CarComponent type="model" lineAngle={30} />
+      </motion.div>
+
+      <motion.div
         className="col-start-3 row-start-1"
-        type="gearbox"
-        side="left"
-        lineAngle={-25}
-        lineWidth={16}
-      />
-      <CarComponent
+        animate={{ scale: 1, opacity: 1, x: 0 }}
+        transition={{ delay: 0.1 }}
+        initial={{ scale: 0.5, opacity: 0, x: 100 }}
+      >
+        <CarComponent
+          type="gearbox"
+          side="left"
+          lineAngle={-25}
+          lineWidth={16}
+        />
+      </motion.div>
+
+      <motion.div
         className="col-start-1 row-start-3"
-        type="engine"
-        lineAngle={10}
-        lineWidth={16}
-      />
-      <CarComponent
+        animate={{ scale: 1, opacity: 1, x: 0 }}
+        transition={{ delay: 0.2 }}
+        initial={{ scale: 0.5, opacity: 0, x: -100 }}
+      >
+        <CarComponent type="engine" lineAngle={10} lineWidth={16} />
+      </motion.div>
+
+      <motion.div
         className="col-start-3 row-start-4"
-        type="color"
-        side="left"
-        lineAngle={30}
-      />
-      <div className="flex items-center w-full h-full col-start-2 row-start-1 row-end-4 text-4xl text-center">
-        <CarImage model={activeModel} color={activeColor} />
-      </div>
+        animate={{ scale: 1, opacity: 1, x: 0 }}
+        transition={{ delay: 0.3 }}
+        initial={{ scale: 0.5, opacity: 0, x: 100 }}
+      >
+        <CarComponent type="color" side="left" lineAngle={30} />
+      </motion.div>
+
+      <CarImage key={activeModel} model={activeModel} color={activeColor} />
+
       <style jsx>{`
         .car-grid {
           display: grid;

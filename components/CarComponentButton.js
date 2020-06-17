@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
+import { motion } from "framer-motion";
 
 const CarComponentButton = ({ name, state, clickHandler, tooltipText }) => {
   let additionalClassNames = "";
@@ -14,11 +15,15 @@ const CarComponentButton = ({ name, state, clickHandler, tooltipText }) => {
   }
   const disabled = state === "disabled";
   return (
-    <div>
+    <motion.div
+      whileHover={{ y: state === "inactive" ? -2 : 0 }}
+      whileTap={{ scale: state === "disabled" ? 1 : 1.05 }}
+    >
       <span data-tip={tooltipText} data-tip-disable={!disabled}>
         <button
           disabled={disabled}
-          className={`uppercase py-2 px-4 border border-white rounded-md part-button text-sm font-medium ${additionalClassNames}`}
+          className={`uppercase py-2 px-4 border border-white rounded-md
+          part-button text-sm font-medium transition-colors duration-200 ${additionalClassNames}`}
           onClick={!disabled ? clickHandler : null}
         >
           {name}
@@ -29,7 +34,7 @@ const CarComponentButton = ({ name, state, clickHandler, tooltipText }) => {
         textColor="black"
         effect="solid"
       ></ReactTooltip>
-    </div>
+    </motion.div>
   );
 };
 

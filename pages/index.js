@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Car from "../components/Car";
 import Summary from "../components/Summary";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
@@ -8,10 +9,22 @@ export default function Home() {
       <Head>
         <title>Car customization</title>
       </Head>
-      <h1 className="text-6xl font-display">Car customization</h1>
-      <p className="max-w-xs mb-16 text-xl">
+
+      <motion.h1
+        animate={{ y: 0, opacity: 1 }}
+        initial={{ y: -30, opacity: 0 }}
+        className="text-6xl font-display"
+      >
+        Car customization
+      </motion.h1>
+      <motion.p
+        className="max-w-xs mb-16 text-xl"
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.1 }}
+        initial={{ y: -30, opacity: 0 }}
+      >
         Choose your car preferences and we'll summarize them for you
-      </p>
+      </motion.p>
       <Car />
       <Summary />
     </div>

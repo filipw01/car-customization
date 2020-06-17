@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { contrast } from "chroma-js";
+import { motion } from "framer-motion";
 
 export const Summary = ({ activeParts }) => {
   const [contrastColor, setContrastColor] = useState("black");
@@ -66,19 +67,24 @@ export const Summary = ({ activeParts }) => {
           </div>
         )}
       </div>
-      <div
-        className={`block w-4/5 px-6 py-3 mx-auto mt-4 text-sm text-center rounded ${
-          !isComplete ? "bg-transparent" : "bg-black"
-        }`}
+      <motion.div
+        whileHover={{ y: isComplete ? -2 : 0 }}
+        whileTap={{ y: 0, scale: 1.05 }}
       >
-        {isComplete ? (
-          <Link href="/order/">
-            <a>Order your awesome car for ${sum}</a>
-          </Link>
-        ) : (
-          "Your car is incomplete"
-        )}
-      </div>
+        <div
+          className={`block w-4/5 px-6 py-3 mx-auto mt-4 text-sm text-center rounded ${
+            !isComplete ? "bg-transparent" : "bg-black"
+          }`}
+        >
+          {isComplete ? (
+            <Link href="/success/">
+              <a>Order your awesome car for ${sum}</a>
+            </Link>
+          ) : (
+            <p className="cursor-default">Your car is incomplete</p>
+          )}
+        </div>
+      </motion.div>
       <svg
         width="0"
         height="0"

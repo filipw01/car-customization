@@ -5,6 +5,9 @@ module.exports = {
       body: "Livvic",
     },
     extend: {
+      zIndex: {
+        "-10": "-10",
+      },
       colors: {
         "dark-gray": "#292929",
         "light-gray": "#373737",
