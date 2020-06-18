@@ -75,7 +75,7 @@ export default function CarImage({ model, color }) {
       break;
 
     default:
-      carSvg = <div className="flex-grow h-full">Pick your model</div>;
+      carSvg = <div className="flex-grow">Pick your model</div>;
       break;
   }
   return (

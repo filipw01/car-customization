@@ -14,7 +14,7 @@ const Success = ({ model, color }) => {
       <motion.h1
         animate={{ y: 0, opacity: 1 }}
         initial={{ y: -30, opacity: 0 }}
-        className="text-6xl text-center font-display"
+        className="mb-4 text-5xl leading-none text-center lg:text-6xl font-display"
       >
         Ordered successfully
       </motion.h1>

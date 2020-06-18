@@ -13,7 +13,7 @@ export default function Home() {
       <motion.h1
         animate={{ y: 0, opacity: 1 }}
         initial={{ y: -30, opacity: 0 }}
-        className="text-6xl font-display"
+        className="mb-4 text-5xl leading-none lg:text-6xl font-display"
       >
         Car customization
       </motion.h1>
