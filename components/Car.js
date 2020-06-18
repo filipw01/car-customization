@@ -10,7 +10,6 @@ const Car = ({ fetchParts, activeModel, activeColor }) => {
   useEffect(() => {
     fetchParts();
   }, []);
-
   return (
     <div className="flex flex-col col-gap-4 xl:col-gap-8 car-grid">
       <CarImage key={activeModel} model={activeModel} color={activeColor} />

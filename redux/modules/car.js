@@ -85,5 +85,12 @@ export function getParts() {
   return (dispatch) =>
     fetch("/api/carComponents")
       .then((data) => data.json())
-      .then((data) => dispatch(changeAvailableParts(data)));
+      .then((data) => {
+        dispatch(changeAvailableParts(data.parts));
+        // Set default options
+        data.default.forEach((defaultPartId) => {
+          const part = data.parts.find((part) => defaultPartId === part.id);
+          dispatch(changePart(part));
+        });
+      });
 }
