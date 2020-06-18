@@ -22,7 +22,7 @@ const CarComponentButton = ({ name, state, clickHandler, tooltipText }) => {
       <span data-tip={tooltipText} data-tip-disable={!disabled}>
         <button
           disabled={disabled}
-          className={`uppercase py-2 px-4 border border-white rounded-md
+          className={`uppercase mx-1 my-1 py-2 px-4 border border-white rounded-md
           part-button text-sm font-medium transition-colors duration-200 ${additionalClassNames}`}
           onClick={!disabled ? clickHandler : null}
         >

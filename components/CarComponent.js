@@ -23,9 +23,9 @@ const CarComponent = ({
   const activePartId = activeParts.find((part) => part.type === type)?.id;
   const reverseSide = side === "left" ? "right" : "left";
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative lg:my-0 my-2 ${className}`}>
       <div
-        className={`h-px origin-${reverseSide} bg-white justify-self-end absolute ${side}-0 top-0`}
+        className={`hidden lg:block h-px origin-${reverseSide} bg-white justify-self-end absolute ${side}-0 top-0`}
         style={{
           width: `${lineWidth}rem`,
           transform: `translate(${
@@ -35,18 +35,22 @@ const CarComponent = ({
       >
         <div
           className={`w-8 h-8 transform -translate-y-1/2 bg-white rounded-full ${
-            side === "right" ? "ml-auto" : ""
+            side === "right" ? "lg:ml-auto" : ""
           }`}
         ></div>
       </div>
       <p
         className={`mb-1 text-xs uppercase font-display tracking-wider ${
-          side === "left" ? "text-right" : ""
+          side === "left" ? "lg:text-right" : ""
         }`}
       >
         {type}
       </p>
-      <div className="flex pt-3 space-x-2 border-t border-white">
+      <div
+        className={`flex flex-wrap pt-2 border-t border-white ${
+          side === "left" ? "lg:justify-end" : ""
+        }`}
+      >
         {parts?.map((part) => {
           let buttonState = part.state;
           if (activePartId === part.id) {

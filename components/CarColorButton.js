@@ -22,7 +22,7 @@ const CarColorButton = ({ color, state, clickHandler, tooltipText }) => {
           disabled={disabled}
           style={{ backgroundColor: color }}
           onClick={!disabled ? clickHandler : null}
-          className={`flex justify-end px-1 py-1 border rounded-md color-button border-transparent mx-between-2 ${
+          className={`flex justify-end px-1 py-1 mx-1 my-1 border rounded-md color-button border-transparent mx-between-2 ${
             state === "active" ? `border-${contrastColor}` : ""
           }`}
         >
@@ -43,7 +43,7 @@ const CarColorButton = ({ color, state, clickHandler, tooltipText }) => {
           )}
           {disabled && (
             <svg
-              className="self-center w-1/2 mx-auto"
+              className="self-center h-4 mx-auto"
               viewBox="0 0 9 9"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

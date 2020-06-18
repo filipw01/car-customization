@@ -26,7 +26,7 @@ export default function Home() {
         Choose your car preferences and we'll summarize them for you
       </motion.p>
       <Car />
-      <Summary />
+      <Summary className="mt-8 lg:mt-0" />
     </div>
   );
 }

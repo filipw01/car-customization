@@ -12,7 +12,9 @@ const Car = ({ fetchParts, activeModel, activeColor }) => {
   }, []);
 
   return (
-    <div className="col-gap-8 car-grid">
+    <div className="flex flex-col col-gap-4 xl:col-gap-8 car-grid">
+      <CarImage key={activeModel} model={activeModel} color={activeColor} />
+
       <motion.div
         className="col-start-1 row-start-2 justify-self-end"
         animate={{ scale: 1, opacity: 1, x: 0 }}
@@ -53,14 +55,19 @@ const Car = ({ fetchParts, activeModel, activeColor }) => {
         <CarComponent type="color" side="left" lineAngle={30} />
       </motion.div>
 
-      <CarImage key={activeModel} model={activeModel} color={activeColor} />
-
       <style jsx>{`
-        .car-grid {
-          display: grid;
-          justify-items: start;
-          grid-template-columns: 36rem 1fr 12rem;
-          grid-template-rows: 4rem 8rem 8rem 8rem;
+        @media (min-width: 1024px) {
+          .car-grid {
+            display: grid;
+            justify-items: start;
+            grid-template-columns: 24rem 1fr 14rem;
+            grid-template-rows: 4rem 8rem 8rem 8rem;
+          }
+        }
+        @media (min-width: 1280px) {
+          .car-grid {
+            grid-template-columns: 34rem 1fr 14rem;
+          }
         }
       `}</style>
       <style jsx global>{`

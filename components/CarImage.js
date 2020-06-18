@@ -8,8 +8,8 @@ export default function CarImage({ model, color }) {
     case "PRO RS3":
       carSvg = (
         <svg
-          className="flex-grow"
-          viewBox="0 0 183 165"
+          className="flex-grow h-full"
+          viewBox="-1 -1 186 167"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -25,8 +25,8 @@ export default function CarImage({ model, color }) {
     case "UBER RS2":
       carSvg = (
         <svg
-          className="flex-grow"
-          viewBox="0 0 752 670"
+          className="flex-grow h-full"
+          viewBox="-1 -1 754 672"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -42,8 +42,8 @@ export default function CarImage({ model, color }) {
     case "STANDARD":
       carSvg = (
         <svg
-          className="flex-grow"
-          viewBox="0 0 480 384"
+          className="flex-grow h-full"
+          viewBox="-1 -2 482 388"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -59,10 +59,10 @@ export default function CarImage({ model, color }) {
     case "WK":
       carSvg = (
         <svg
-          className="flex-grow"
+          className="flex-grow h-full"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
-          viewBox="0 0 407 339"
+          viewBox="-1 -2 409 342"
         >
           <path
             fill={color}
@@ -75,12 +75,12 @@ export default function CarImage({ model, color }) {
       break;
 
     default:
-      carSvg = <div className="flex-grow">Pick your model</div>;
+      carSvg = <div className="flex-grow h-full">Pick your model</div>;
       break;
   }
   return (
     <motion.div
-      className="flex items-center w-full h-full col-start-2 row-start-1 row-end-4 text-4xl text-center -z-10"
+      className="flex items-center w-full h-56 col-start-2 row-start-1 row-end-4 mx-auto text-4xl text-center lg:h-full -z-10"
       animate={{ scale: 1 }}
       initial={{ scale: 0.5 }}
     >

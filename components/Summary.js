@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { contrast } from "chroma-js";
 import { motion } from "framer-motion";
 
-export const Summary = ({ activeParts }) => {
+export const Summary = ({ activeParts, className = "" }) => {
   const [contrastColor, setContrastColor] = useState("black");
   const [color, setColor] = useState({ name: null, hexValue: null });
   const activeColor = activeParts.find((part) => part.type === "color");
@@ -32,7 +32,9 @@ export const Summary = ({ activeParts }) => {
     100;
 
   return (
-    <div className="max-w-md px-8 py-6 pb-20 rounded bg-light-gray bottom-tear">
+    <div
+      className={`max-w-md px-8 py-6 pb-20 rounded bg-light-gray bottom-tear ${className}`}
+    >
       <h2 className="mb-2 text-4xl font-display">Summary</h2>
       <div className="flex justify-between py-1 text-sm border-b border-dark-gray">
         <div>Model</div>
@@ -110,6 +112,7 @@ export const Summary = ({ activeParts }) => {
 
 Summary.propTypes = {
   activeParts: PropTypes.array,
+  className: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
