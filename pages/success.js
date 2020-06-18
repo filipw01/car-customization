@@ -44,7 +44,7 @@ const Success = ({ model, color }) => {
       >
         <Link href="/">
           <a className="px-12 py-3 mx-auto bg-black border border-white rounded ">
-            Edit your order
+            Place another order
           </a>
         </Link>
       </motion.div>
