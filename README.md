@@ -1,30 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Car customization app
 
-## Getting Started
+- [Car customization app](#car-customization-app)
+  - [Running locally](#running-locally)
+  - [Used technologies](#used-technologies)
+  - [Part structure](#part-structure)
+  - [Expanding functionalities](#expanding-functionalities)
+  - [Author and license](#author-and-license)
 
-First, run the development server:
+![screen](screenshot.png)
 
-```bash
-npm run dev
-# or
-yarn dev
+## Running locally
+
+To run project locally clone this repository
+
+`git clone https://github.com/filipw01/car-customization`
+
+Install dependencies
+
+`npm install`
+
+And simply run dev environment
+
+`npm run dev`
+
+By default app will run on `localhost:3000`
+
+## Used technologies
+
+App is created with Next.js and hosted on Vercel. Next.js provides both API endpoint and SSR for React app.
+Animations are created with FramerMotion
+
+## Part structure
+
+Everything in car is a car part including it's model.
+
+```json
+{
+  "id": 7,
+  "name": "5.2L 532BHP",
+  "dependencies": [[1, 2], 6],
+  "price": 13.99,
+  "type": "engine"
+},
 ```
+Each car part must provide `id`, `name`, `price` and `type`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Color as a part type has on additional requirement `hexValue` and it's in form of `#ffffff`
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+`dependencies` are optional and have form of 
+- `[1, 2]` - must have both part with id 1 and 2
+- `[[1, 2]]` - must have both part with id 1 or 2
+- `[[1, 2], 3]` - must have both part with id (1 or 2) and 3
 
-## Learn More
+## Expanding functionalities
 
-To learn more about Next.js, take a look at the following resources:
+Adding new parts and it's dependencies is not a problem. Just add it to `data.json`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To maintain complex layout adding another part type requires adding new CarComponent to Car
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Author and license
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Author: Filip Wachowiak
+License: MIT
