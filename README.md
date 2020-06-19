@@ -1,5 +1,7 @@
 # Car customization app
 
+[See it live](https://car-customization.now.sh)
+
 - [Car customization app](#car-customization-app)
   - [Running locally](#running-locally)
   - [Used technologies](#used-technologies)
@@ -27,7 +29,7 @@ By default app will run on `localhost:3000`
 
 ## Used technologies
 
-App is created with Next.js and hosted on Vercel. Next.js provides both API endpoint and SSR for React app.
+App is created with Next.js, Redux.js and Tailwind.css and hosted on Vercel. Next.js provides both API endpoint and SSR for React app.
 Animations are created with FramerMotion
 
 ## Part structure
