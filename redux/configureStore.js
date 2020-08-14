@@ -1,10 +1,12 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import car from "./modules/car";
+import car, { defaultState as defaultCarState } from "./modules/car";
 import ReduxThunk from "redux-thunk";
 
-const reducer = combineReducers({
+export const reducer = combineReducers({
   car,
 });
+
+export const initialState = { car: defaultCarState };
 
 const composeEnhancers =
   (typeof window !== "undefined" &&

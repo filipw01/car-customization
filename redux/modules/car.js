@@ -6,7 +6,7 @@ const CHANGE_PART = "car-customization/car/CHANGE_PART";
 const CHANGE_AVAILABLE_PARTS = "car-customization/car/CHANGE_AVAILABLE_PARTS";
 
 // Reducer
-const defaultState = {
+export const defaultState = {
   availableParts: [],
   activeParts: [],
 };

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest "
   },
   "dependencies": {
     "chroma-js": "^2.1.0",
@@ -17,11 +18,16 @@
     "react-redux": "^7.2.0",
     "react-tooltip": "^4.2.7",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "tailwindcss": "^1.4.6",
+    "@fullhuman/postcss-purgecss": "^2.2.0",
+    "autoprefixer": "^9.8.0"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^2.2.0",
-    "autoprefixer": "^9.8.0",
-    "tailwindcss": "^1.4.6"
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "@testing-library/react": "^10.4.8",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.0"
   }
 }

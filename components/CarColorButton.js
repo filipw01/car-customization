@@ -20,6 +20,9 @@ const CarColorButton = ({ color, state, clickHandler, tooltipText }) => {
       <span data-tip={tooltipText} data-tip-disable={!disabled}>
         <button
           disabled={disabled}
+          aria-label={color}
+          aria-selected={state === "active"}
+          role="option"
           style={{ backgroundColor: color }}
           onClick={!disabled ? clickHandler : null}
           className={`flex justify-end px-1 py-1 mx-1 my-1 border rounded-md color-button border-transparent mx-between-2 ${

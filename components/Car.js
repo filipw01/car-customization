@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import CarComponent from "../components/CarComponent";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { motion } from "framer-motion";
+import CarComponent from "../components/CarComponent";
 import { getParts } from "../redux/modules/car";
 import CarImage from "./CarImage";
-import { motion } from "framer-motion";
 
 const Car = ({ fetchParts, activeModel, activeColor }) => {
   useEffect(() => {

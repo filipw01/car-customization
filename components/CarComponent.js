@@ -47,6 +47,7 @@ const CarComponent = ({
         {type}
       </p>
       <div
+        role="listbox"
         className={`flex flex-wrap pt-2 border-t border-white ${
           side === "left" ? "lg:justify-end" : ""
         }`}
