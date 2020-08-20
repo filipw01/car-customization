@@ -1,8 +1,9 @@
+import React from "react";
 import Head from "next/head";
-import { motion } from "framer-motion";
-import CarImage from "../components/CarImage";
-import { connect } from "react-redux";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { connect } from "react-redux";
+import CarImage from "../components/CarImage";
 
 const Success = ({ model, color }) => {
   return (
@@ -32,7 +33,7 @@ const Success = ({ model, color }) => {
         animate={{ y: 0, opacity: 1 }}
         initial={{ y: -30, opacity: 0 }}
       >
-        <CarImage model={model} color={color} />
+        <CarImage model={model} color={color}/>
       </motion.div>
       <motion.div
         className="flex justify-center mt-12"
@@ -55,7 +56,7 @@ const mapStateToProps = (state) => {
   return {
     model: state.car.activeParts.find((part) => part.type === "model")?.name,
     color: state.car.activeParts.find((part) => part.type === "color")
-      ?.hexValue,
+      ?.hexValue
   };
 };
 export default connect(mapStateToProps, null)(Success);
