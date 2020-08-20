@@ -1,15 +1,10 @@
-import React, { useMemo } from "react";
-import { contrast } from "chroma-js";
+import React from "react";
 import PropTypes from "prop-types";
 import CarOption from "./CarOption";
+import useContrastColor from "../utils/useContrastColor";
 
 const CarColorOption = ({ color, state, clickHandler, tooltipText }) => {
-  const contrastColor = useMemo(() => {
-    if (contrast("#fff", color) + 1 > contrast("#000", color)) {
-      return "white";
-    }
-    return "black";
-  }, [color]);
+  const contrastColor = useContrastColor(color);
 
   return (
     <CarOption
