@@ -2,6 +2,7 @@ import Head from "next/head";
 import Car from "../components/Car";
 import Summary from "../components/Summary";
 import { motion } from "framer-motion";
+import React from "react";
 
 export default function Home() {
   return (

@@ -1,32 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { connect } from "react-redux";
-import { contrast } from "chroma-js";
 import { motion } from "framer-motion";
+import SummaryElement from "./SummaryElement";
+import useContrastColor from "../utils/useContrastColor";
 
 export const Summary = ({ activeParts, className = "" }) => {
-  const [contrastColor, setContrastColor] = useState("black");
-  const [color, setColor] = useState({ name: null, hexValue: null });
-  const activeColor = activeParts.find((part) => part.type === "color");
-  const isComplete = activeParts.length >= 4;
-  useEffect(() => {
-    setColor({
-      name: activeColor?.name,
-      hexValue: activeColor?.hexValue,
-    });
-    if (activeColor?.hexValue) {
-      if (
-        contrast("#fff", activeColor.hexValue) + 1 >
-        contrast("#000", activeColor.hexValue)
-      ) {
-        setContrastColor("white");
-      } else {
-        setContrastColor("black");
-      }
-    }
-  }, [activeColor]);
+  const color = useMemo(() => {
+      const activeColor = activeParts.find((part) => part.type === "color");
+      return {
+        name: activeColor?.name,
+        hexValue: activeColor?.hexValue
+      };
+    },
+    [activeParts]);
+  const contrastColor = useContrastColor(color?.hexValue);
 
+  const isComplete = activeParts.length >= 4;
   const sum =
     Math.round(activeParts.reduce((acc, curr) => acc + curr.price, 0) * 100) /
     100;
@@ -36,39 +27,27 @@ export const Summary = ({ activeParts, className = "" }) => {
       className={`max-w-md px-8 py-6 pb-20 rounded bg-light-gray bottom-tear ${className}`}
     >
       <h2 className="mb-2 text-4xl font-display">Summary</h2>
-      <div className="flex justify-between py-1 text-sm border-b border-dark-gray">
-        <div>Model</div>
-        <div className="font-medium">
-          {activeParts.find((part) => part.type === "model")?.name}
-        </div>
-      </div>
-      <div className="flex justify-between py-1 text-sm border-b border-dark-gray">
-        <div>Gearbox</div>
-        <div className="font-medium">
-          {activeParts.find((part) => part.type === "gearbox")?.name}
-        </div>
-      </div>
-      <div className="flex justify-between py-1 text-sm border-b border-dark-gray">
-        <div>Engine</div>
-        <div className="font-medium">
-          {activeParts.find((part) => part.type === "engine")?.name}
-        </div>
-      </div>
-      <div className="flex justify-between py-1 text-sm">
-        <div>Color</div>
-        {color?.hexValue && (
-          <div className="flex items-center font-medium">
-            <div
-              className="w-4 h-4 mr-2 border rounded-full"
-              style={{
-                borderColor: contrastColor,
-                backgroundColor: color.hexValue,
-              }}
-            ></div>
-            <p>{color.name}</p>
-          </div>
-        )}
-      </div>
+      <SummaryElement partType="model" activeParts={activeParts}/>
+      <SummaryElement partType="gearbox" activeParts={activeParts}/>
+      <SummaryElement partType="engine" activeParts={activeParts}/>
+      <label className="flex justify-between py-1 text-sm">
+        <div className="capitalize">color</div>
+        <output className="flex items-center font-medium">
+          {color?.hexValue ? (
+            <>
+              <div
+                data-testid="color-output-sample"
+                className="w-4 h-4 mr-2 border rounded-full"
+                style={{
+                  borderColor: contrastColor,
+                  backgroundColor: color.hexValue
+                }}
+              />
+              <p>{color.name}</p>
+            </>
+          ) : null}
+        </output>
+      </label>
       <motion.div
         whileHover={{ y: isComplete ? -2 : 0 }}
         whileTap={{ y: 0, scale: 1.05 }}
@@ -139,12 +118,12 @@ export const Summary = ({ activeParts, className = "" }) => {
 
 Summary.propTypes = {
   activeParts: PropTypes.array,
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 const mapStateToProps = (state) => {
   return {
-    activeParts: state.car.activeParts,
+    activeParts: state.car.activeParts
   };
 };
 
