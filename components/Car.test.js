@@ -1,14 +1,14 @@
 import React from "react";
 import { describe, test } from "@jest/globals";
-import { screen, render } from "../utils/testUtils";
 import "@testing-library/jest-dom/extend-expect";
-import Car from "./Car";
-import data from "../data.json";
 import userEvent from "@testing-library/user-event";
+import { screen, render } from "../utils/testUtils";
+import Car from "./Car";
+import testData from "../test-data.json";
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
-    json: () => Promise.resolve(data)
+    json: () => Promise.resolve(testData)
   })
 );
 
@@ -54,4 +54,19 @@ describe("Car", () => {
     const info = await screen.findAllByText(`Requires "PRO RS3" or "UBER RS2" or "STANDARD"`);
     expect(info.length).toBeGreaterThan(0);
   });
+  test("select one part in category",async ()=>{
+    render(<Car/>)
+    const firstModel = await screen.findByRole("option", {name:/PRO RS3/i})
+    const secondModel = screen.getByRole("option", {name:/UBER RS2/i})
+    const thirdModel = screen.getByRole("option", {name:/STANDARD/i})
+    const fourthModel = screen.getByRole("option", {name:/WK/i})
+    userEvent.click(firstModel)
+    userEvent.click(secondModel)
+    userEvent.click(thirdModel)
+    userEvent.click(fourthModel)
+    expect(firstModel.getAttribute("aria-selected")).toBe("false")
+    expect(secondModel.getAttribute("aria-selected")).toBe("false")
+    expect(thirdModel.getAttribute("aria-selected")).toBe("false")
+    expect(fourthModel.getAttribute("aria-selected")).toBe("true")
+  })
 });
