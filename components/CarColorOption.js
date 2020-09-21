@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import CarOption from "./CarOption";
 import useContrastColor from "../utils/useContrastColor";
 
-const CarColorOption = ({ color, state, clickHandler, tooltipText }) => {
+const CarColorOption = ({ color, colorName, state, clickHandler, tooltipText }) => {
   const contrastColor = useContrastColor(color);
 
   return (
     <CarOption
       state={state}
-      label={color}
+      label={colorName}
       clickHandler={clickHandler}
       tooltipText={tooltipText}
       buttonClassName="flex justify-end px-1 py-1 mx-1 my-1 border rounded-md
@@ -60,6 +60,7 @@ const CarColorOption = ({ color, state, clickHandler, tooltipText }) => {
 
 CarColorOption.propTypes = {
   color: PropTypes.string.isRequired,
+  colorName: PropTypes.string.isRequired,
   state: PropTypes.oneOf(["active", "inactive", "disabled"]),
   clickHandler: PropTypes.func,
   tooltipText: PropTypes.string

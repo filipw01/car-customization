@@ -37,7 +37,7 @@ const CarComponent = ({
           className={`w-8 h-8 transform -translate-y-1/2 bg-white rounded-full ${
             side === "right" ? "lg:ml-auto" : ""
           }`}
-        ></div>
+        />
       </div>
       <p
         className={`mb-1 text-xs uppercase font-display tracking-wider ${
@@ -64,6 +64,7 @@ const CarComponent = ({
                 clickHandler={() => changePart(part)}
                 tooltipText={dependenciesToString(part.dependencies)}
                 color={part.hexValue}
+                colorName={part.name}
                 state={buttonState}
               />
             );

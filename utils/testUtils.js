@@ -1,17 +1,18 @@
 import React from "react";
 import { render as rtlRender } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 import {
   reducer,
   initialState
 } from "../redux/configureStore";
+import ReduxThunk from "redux-thunk";
 
 function render(
   ui,
   {
     initialState = initialState,
-    store = createStore(reducer, initialState),
+    store = createStore(reducer, initialState, applyMiddleware(ReduxThunk)),
     ...renderOptions
   } = {}
 ) {
