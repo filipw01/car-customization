@@ -1,6 +1,6 @@
 import React from "react";
-import CarComponentButton from "./CarComponentButton";
-import CarColorButton from "./CarColorButton";
+import CarComponentOption from "./CarComponentOption";
+import CarColorOption from "./CarColorOption";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import missingDependenciesString from "../utils/missingDependenciesString";
@@ -37,7 +37,7 @@ const CarComponent = ({
           className={`w-8 h-8 transform -translate-y-1/2 bg-white rounded-full ${
             side === "right" ? "lg:ml-auto" : ""
           }`}
-        ></div>
+        />
       </div>
       <p
         className={`mb-1 text-xs uppercase font-display tracking-wider ${
@@ -59,17 +59,18 @@ const CarComponent = ({
           }
           if (type === "color") {
             return (
-              <CarColorButton
+              <CarColorOption
                 key={part.id}
                 clickHandler={() => changePart(part)}
                 tooltipText={dependenciesToString(part.dependencies)}
                 color={part.hexValue}
+                colorName={part.name}
                 state={buttonState}
               />
             );
           } else {
             return (
-              <CarComponentButton
+              <CarComponentOption
                 key={part.id}
                 clickHandler={() => changePart(part)}
                 tooltipText={dependenciesToString(part.dependencies)}

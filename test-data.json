@@ -1,0 +1,73 @@
+{
+  "default": [1, 13],
+  "parts": [
+    { "id": 1, "name": "PRO RS3", "price": 20.99, "type": "model" },
+    { "id": 2, "name": "UBER RS2", "price": 19.99, "type": "model" },
+    { "id": 3, "name": "STANDARD", "price": 19.99, "type": "model" },
+    { "id": 4, "name": "WK", "price": 12.99, "type": "model" },
+    {
+      "id": 5,
+      "name": "MANUAL",
+      "price": 12.99,
+      "type": "gearbox"
+    },
+    {
+      "id": 6,
+      "name": "AUTOMATIC",
+      "dependencies": [[1, 2, 3]],
+      "price": 22.99,
+      "type": "gearbox"
+    },
+    {
+      "id": 7,
+      "name": "5.2L 532BHP",
+      "dependencies": [[1, 2], 6],
+      "price": 13.99,
+      "type": "engine"
+    },
+    {
+      "id": 8,
+      "name": "4.2L 443BHP",
+      "dependencies": [[1, 2]],
+      "price": 9.99,
+      "type": "engine"
+    },
+    {
+      "id": 9,
+      "name": "3.6L 374BHP",
+      "dependencies": [[1, 2, 3]],
+      "price": 3.99,
+      "type": "engine"
+    },
+    { "id": 10, "name": "2.0L 166BHP", "price": 29.99, "type": "engine" },
+    {
+      "id": 11,
+      "name": "white",
+      "hexValue": "#E9E3E3",
+      "dependencies": [[2, 3, 4]],
+      "price": 29.99,
+      "type": "color"
+    },
+    {
+      "id": 12,
+      "name": "black",
+      "hexValue": "#322F2F",
+      "price": 39.99,
+      "type": "color"
+    },
+    {
+      "id": 13,
+      "name": "red",
+      "hexValue": "#DE4339",
+      "price": 29.99,
+      "type": "color"
+    },
+    {
+      "id": 14,
+      "name": "gold",
+      "hexValue": "#DABC52",
+      "price": 29.99,
+      "type": "color"
+    }
+  ]
+}
