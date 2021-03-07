@@ -69,7 +69,7 @@ const Car = ({ fetchParts, activeModel, activeColor }) => {
           }
         }
       `}</style>
-      <style jsx global>{`
+      <style jsx global="true">{`
         .justify-self-center {
           justify-self: center;
         }
